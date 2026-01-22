@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R77 FISH IT STORE</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0b0b0f;
+            color: #ffffff;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background: linear-gradient(90deg, #000000, #1a0000);
+            border-bottom: 2px solid #ff1e1e;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 45px;
+        }
+
+        .logo h1 {
+            color: #ff1e1e;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            color: #ffffff;
+            margin-left: 25px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ff1e1e;
+        }
+
+        /* HERO */
+        .hero {
+            height: 80vh;
+            background: url("images/bg-gaming.jpg") center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            color: #ff1e1e;
+            text-shadow: 0 0 15px #ff1e1e;
+        }
+
+        .hero p {
+            margin: 15px 0;
+            font-size: 18px;
+        }
+
+        .hero button {
+            padding: 12px 30px;
+            border: none;
+            background: #ff1e1e;
+            color: #ffffff;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .hero button:hover {
+            background: #ffffff;
+            color: #ff1e1e;
+        }
+
+        /* PRODUCTS */
+        #products {
+            padding: 60px 50px;
+            text-align: center;
+        }
+
+        #products h2 {
+            color: #ff1e1e;
+            margin-bottom: 40px;
+        }
+
+        .products-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .product-card {
+            background: #141414;
+            border: 2px solid #ff1e1e;
+            border-radius: 10px;
+            width: 250px;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #ff1e1e;
+        }
+
+        .product-card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .product-card h3 {
+            margin: 15px 0 5px;
+        }
+
+        .product-card p {
+            color: #ff1e1e;
+            font-weight: bold;
+        }
+
+        .product-card button {
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            background: #ff1e1e;
+            color: #ffffff;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .product-card button:hover {
+            background: #ffffff;
+            color: #ff1e1e;
+        }
+
+        /* CONTACT */
+        #contact {
+            padding: 40px;
+            background: #0f0f0f;
+            text-align: center;
+        }
+
+        #contact h2 {
+            color: #ff1e1e;
+            margin-bottom: 10px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #000000;
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+            color: #aaaaaa;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <img src="/R77COMMUNITY/LOGO R77 (1).png" alt="Logo R77">
+        <h1>R77FISH</h1>
+    </div>
+    <nav>
+        <a href="#home">HOME</a>
+        <a href="#products">PRODUK</a>
+        <a href="#contact">KONTAK</a>
+    </nav>
+</header>
+
+<section id="home" class="hero">
+    <h2>R77 LOOKING YOUR FISH </h2>
+    <p>Belanja Murah Meriah Borong Auto Discont </p>
+    <button>MASUK STORE</button>
+</section>
+
+<section id="products">
+    <h2>🔥 STOK SAAT INI 🔥</h2>
+
+    <div class="products-container">
+        <div class="product-card">
+            <img src="/R77COMMUNITY/Screenshot_28.png" alt="Kaos R77">
+            <h3>MEGALODON OCEAN</h3>
+            <p>Rp 130,000</p>
+            <button>BELI SEKARANG</button>
+        </div>
+
+        <div class="product-card">
+            <img src="/R77COMMUNITY/Screenshot_27.png" alt="Hoodie R77">
+            <h3>LEVIATHAN </h3>
+            <p>Rp 150,000</p>
+            <button>BELI SEKARANG</button>
+        </div>
+
+
+        <div class="product-card">
+            <img src="/R77COMMUNITY/Screenshot_29.png" alt="SC TUMBAL">
+            <h3>MEGALODON PIRTE</h3>
+            <p>Rp 30,000 / PRODUCTS</p>
+            <button>BELI SEKARANG</button>
+        </div>
+
+        <div class="product-card">
+            <img src="/R77COMMUNITY/tumbal.jpg" alt="SC TUMBAL">
+            <h3>SC TUMBAL</h3>
+            <p>Rp 3,000 / PRODUCTS</p>
+            <button>BELI SEKARANG</button>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <h2>KONTAK R77</h2>
+    <p>EMAIL : R77COMMUNITY@GMAIL.COM </p>
+    <p>WhatsApp: +62 898-5035-372</p>
+</section>
+
+<footer>
+    <p>© 2026 R77 GAMING STORE | ALL RIGHTS RESERVED</p>
+</footer>
+
+</body>
+</html>
