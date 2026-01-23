@@ -20,6 +20,12 @@ border-bottom:2px solid #ff1e1e
 .logo{display:flex;align-items:center;gap:10px}
 .logo img{width:45px}
 .logo h1{color:#ff1e1e;letter-spacing:2px}
+.admin-btn{
+margin-left:auto;
+padding:8px 16px;
+background:#ff1e1e;border:none;color:#fff;
+font-weight:bold;border-radius:6px;cursor:pointer
+}
 
 /* PRODUCTS */
 #products{padding:60px 50px;text-align:center}
@@ -41,20 +47,20 @@ background:#ff1e1e;color:#fff;border:none;border-radius:5px;
 font-weight:bold;cursor:pointer
 }
 
-/* PAYMENT */
-.payment-popup{
+/* POPUP */
+.popup{
 display:none;position:fixed;inset:0;
 background:rgba(0,0,0,.85);
 justify-content:center;align-items:center;z-index:10000
 }
-.payment-box{
+.box{
 background:#141414;border:2px solid #ff1e1e;
 border-radius:12px;padding:20px;text-align:center;width:340px
 }
-.payment-box input,select{
+.box input{
 width:100%;padding:8px;margin:8px 0;border-radius:5px;border:none
 }
-.payment-box button{
+.box button{
 margin-top:10px;width:100%;padding:10px;
 background:#ff1e1e;color:#fff;border:none;border-radius:5px;font-weight:bold
 }
@@ -106,11 +112,11 @@ background:#ff1e1e;border:none;color:#fff;font-weight:bold
 <img src="LOGO R77 (1).png">
 <h1>R77FISH</h1>
 </div>
+<button class="admin-btn" onclick="openAdminLogin()">ADMIN</button>
 </header>
 
 <section id="products">
 <h2>🔥 STOK SAAT INI 🔥</h2>
-
 <div class="products-container">
 
 <div class="product-card">
@@ -118,10 +124,7 @@ background:#ff1e1e;border:none;color:#fff;font-weight:bold
 <h3>MEGALODON OCEAN</h3>
 <p>Rp 130.000</p>
 <p>Stok: <span id="stock-MEGALODON">5</span></p>
-<button id="btn-MEGALODON"
-onclick="openPayment('MEGALODON OCEAN',130000,'MEGALODON')">
-BELI & BAYAR
-</button>
+<button id="btn-MEGALODON" onclick="openPayment('MEGALODON OCEAN',130000,'MEGALODON')">BELI</button>
 </div>
 
 <div class="product-card">
@@ -129,10 +132,7 @@ BELI & BAYAR
 <h3>BATU ENCHAN EVO</h3>
 <p>Rp 1.000</p>
 <p>Stok: <span id="stock-EVO">1070</span></p>
-<button id="btn-EVO"
-onclick="openPayment('BATU ENCHAN EVO',1000,'EVO')">
-BELI & BAYAR
-</button>
+<button id="btn-EVO" onclick="openPayment('BATU ENCHAN EVO',1000,'EVO')">BELI</button>
 </div>
 
 <div class="product-card">
@@ -140,43 +140,61 @@ BELI & BAYAR
 <h3>SC TUMBAL</h3>
 <p>Rp 3.000</p>
 <p>Stok: <span id="stock-TUMBAL">5000</span></p>
-<button id="btn-TUMBAL"
-onclick="openPayment('SC TUMBAL',3000,'TUMBAL')">
-BELI & BAYAR
-</button>
+<button id="btn-TUMBAL" onclick="openPayment('SC TUMBAL',3000,'TUMBAL')">BELI</button>
 </div>
 
 </div>
 </section>
 
-<div class="payment-popup" id="paymentPopup">
-<div class="payment-box">
+<!-- PAYMENT -->
+<div class="popup" id="paymentPopup">
+<div class="box">
 <h3 id="productName"></h3>
 <input type="number" id="qty" min="1" value="1" oninput="updateTotal()">
 <h2 id="totalPrice"></h2>
 <button onclick="sendToWA()">KIRIM KE CS</button>
-<button onclick="closePayment()">TUTUP</button>
+<button onclick="paymentPopup.style.display='none'">TUTUP</button>
 </div>
 </div>
 
-<a href="https://wa.me/6281382500612" class="wa-chat" target="_blank">
-CHAT CS
-</a>
+<!-- ADMIN LOGIN -->
+<div class="popup" id="adminLogin">
+<div class="box">
+<h3>ADMIN LOGIN</h3>
+<input type="password" id="adminPass" placeholder="Password Admin">
+<button onclick="loginAdmin()">LOGIN</button>
+<button onclick="adminLogin.style.display='none'">BATAL</button>
+</div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="popup" id="adminPanel">
+<div class="box">
+<h3>ADMIN PANEL</h3>
+<input id="edit-MEGALODON" type="number" placeholder="Stok Megalodon">
+<input id="edit-EVO" type="number" placeholder="Stok EVO">
+<input id="edit-TUMBAL" type="number" placeholder="Stok Tumbal">
+<button onclick="saveStock()">SIMPAN</button>
+<button onclick="adminPanel.style.display='none'">KELUAR</button>
+</div>
+</div>
+
+<a href="https://wa.me/6281382500612" class="wa-chat" target="_blank">CHAT CS</a>
 
 <script>
+const ADMIN_PASSWORD="r77admin";
 let price=0,product="",productKey="";
+
 let stocks=JSON.parse(localStorage.getItem("stocks"))||{
 MEGALODON:5,EVO:1070,TUMBAL:5000
 };
 
 function renderStock(){
 for(let k in stocks){
-let s=document.getElementById("stock-"+k);
+document.getElementById("stock-"+k).innerText=stocks[k];
 let b=document.getElementById("btn-"+k);
-s.innerText=stocks[k];
 if(stocks[k]<=0){
-b.innerText="STOK HABIS";
-b.disabled=true;b.style.background="#555";
+b.innerText="HABIS";b.disabled=true;b.style.background="#555";
 }
 }
 }
@@ -197,30 +215,40 @@ paymentPopup.style.display="flex";
 }
 
 function updateTotal(){
-let q=parseInt(qty.value);
-if(q>stocks[productKey]) qty.value=stocks[productKey];
 totalPrice.innerText="Rp "+(qty.value*price).toLocaleString("id-ID");
-}
-
-function closePayment(){
-paymentPopup.style.display="none";
 }
 
 function sendToWA(){
 let q=parseInt(qty.value);
-if(q>stocks[productKey]) return alert("Stok tidak cukup");
 stocks[productKey]-=q;
 localStorage.setItem("stocks",JSON.stringify(stocks));
 renderStock();
 window.open(
 `https://wa.me/6281382500612?text=Halo Admin R77%0AProduk:${product}%0AJumlah:${q}%0ATotal:Rp ${(q*price).toLocaleString("id-ID")}`,
-"_blank"
-);
-closePayment();
+"_blank");
+paymentPopup.style.display="none";
+}
+
+/* ADMIN */
+function openAdminLogin(){adminLogin.style.display="flex"}
+function loginAdmin(){
+if(adminPass.value===ADMIN_PASSWORD){
+adminLogin.style.display="none";
+adminPanel.style.display="flex";
+edit-MEGALODON.value=stocks.MEGALODON;
+edit-EVO.value=stocks.EVO;
+edit-TUMBAL.value=stocks.TUMBAL;
+}else alert("Password salah");
+}
+function saveStock(){
+stocks.MEGALODON=parseInt(document.getElementById("edit-MEGALODON").value);
+stocks.EVO=parseInt(document.getElementById("edit-EVO").value);
+stocks.TUMBAL=parseInt(document.getElementById("edit-TUMBAL").value);
+localStorage.setItem("stocks",JSON.stringify(stocks));
+renderStock();
+alert("Stok diperbarui");
 }
 </script>
 
 </body>
 </html>
-
-
