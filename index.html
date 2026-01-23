@@ -4,14 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>R77 FISH IT STORE</title>
-<link rel="icon" href="LOGO R77 (1).png">
+<link rel="icon" type="image/png" href="LOGO R77 (1).png">
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#0b0b0f;color:#fff}
 
 /* HEADER */
 header{
-display:flex;justify-content:space-between;align-items:center;
+display:flex;align-items:center;
 padding:15px 50px;
 background:linear-gradient(90deg,#000,#1a0000);
 border-bottom:2px solid #ff1e1e
@@ -27,20 +28,17 @@ border-bottom:2px solid #ff1e1e
 display:flex;gap:30px;justify-content:center;flex-wrap:wrap
 }
 .product-card{
-background:#141414;border:2px solid #ff1e1e;
-border-radius:10px;width:250px;padding:20px
+background:#141414;border:2px solid #ff1e1e;border-radius:10px;
+width:250px;padding:20px;transition:.3s
 }
+.product-card:hover{transform:scale(1.05);box-shadow:0 0 20px #ff1e1e}
 .product-card img{width:100%;border-radius:8px}
 .product-card h3{margin:15px 0 5px}
 .product-card p{color:#ff1e1e;font-weight:bold}
-.stock{margin-top:5px;font-size:14px}
 .product-card button{
 margin-top:10px;width:100%;padding:10px;
 background:#ff1e1e;color:#fff;border:none;border-radius:5px;
 font-weight:bold;cursor:pointer
-}
-.product-card button:disabled{
-background:#555;cursor:not-allowed
 }
 
 /* PAYMENT */
@@ -51,24 +49,15 @@ justify-content:center;align-items:center;z-index:10000
 }
 .payment-box{
 background:#141414;border:2px solid #ff1e1e;
-border-radius:12px;padding:20px;width:340px;text-align:center
+border-radius:12px;padding:20px;text-align:center;width:340px
 }
-.payment-box h3{color:#ff1e1e}
 .payment-box input,select{
 width:100%;padding:8px;margin:8px 0;border-radius:5px;border:none
 }
 .payment-box button{
-width:100%;padding:10px;margin-top:8px;
+margin-top:10px;width:100%;padding:10px;
 background:#ff1e1e;color:#fff;border:none;border-radius:5px;font-weight:bold
 }
-
-/* BANK */
-.bank-box{
-background:#0f0f0f;border:1px solid #ff1e1e;
-border-radius:8px;padding:10px;margin-top:10px;text-align:left
-}
-.bank-title{color:#ff1e1e;font-weight:bold}
-.bank-row{font-size:13px;color:#ddd}
 
 /* WHATSAPP */
 .wa-chat{
@@ -76,10 +65,41 @@ position:fixed;bottom:20px;right:20px;
 background:#25d366;color:#fff;padding:14px 20px;
 border-radius:50px;font-weight:bold;text-decoration:none
 }
+
+/* CURTAIN */
+.curtain-wrapper{
+position:fixed;inset:0;display:flex;z-index:20000;background:#000
+}
+.curtain{width:50%;background:linear-gradient(90deg,#000,#1a0000);
+transition:transform 1.4s}
+.curtain-wrapper.open .left{transform:translateX(-110%)}
+.curtain-wrapper.open .right{transform:translateX(110%)}
+.curtain-center{
+position:absolute;inset:0;display:flex;flex-direction:column;
+justify-content:center;align-items:center
+}
+.curtain-center h1{color:#ff1e1e;font-size:46px}
+.curtain-center button{
+margin-top:20px;padding:14px 40px;
+background:#ff1e1e;border:none;color:#fff;font-weight:bold
+}
 </style>
 </head>
 
 <body>
+
+<audio id="gateSound">
+<source src="Idgitaf - Sedia Aku Sebelum Hujan (Official Lyric Video).mp3">
+</audio>
+
+<div class="curtain-wrapper" id="curtain">
+<div class="curtain left"></div>
+<div class="curtain right"></div>
+<div class="curtain-center">
+<h1>WELCOME R77 FISH</h1>
+<button onclick="openCurtain()">MASUK STORE</button>
+</div>
+</div>
 
 <header>
 <div class="logo">
@@ -90,124 +110,114 @@ border-radius:50px;font-weight:bold;text-decoration:none
 
 <section id="products">
 <h2>🔥 STOK SAAT INI 🔥</h2>
+
 <div class="products-container">
 
 <div class="product-card">
 <img src="Screenshot_28.png">
 <h3>MEGALODON OCEAN</h3>
 <p>Rp 130.000</p>
-<div class="stock">Stok: <span id="stock-mega"></span></div>
-<button id="btn-mega" onclick="openPayment('mega')">BELI & BAYAR</button>
+<p>Stok: <span id="stock-MEGALODON">3</span></p>
+<button id="btn-MEGALODON"
+onclick="openPayment('MEGALODON OCEAN',130000,'MEGALODON')">
+BELI & BAYAR
+</button>
 </div>
 
 <div class="product-card">
 <img src="batu evol.png">
 <h3>BATU ENCHAN EVO</h3>
 <p>Rp 1.000</p>
-<div class="stock">Stok: <span id="stock-evo"></span></div>
-<button id="btn-evo" onclick="openPayment('evo')">BELI & BAYAR</button>
+<p>Stok: <span id="stock-EVO">10</span></p>
+<button id="btn-EVO"
+onclick="openPayment('BATU ENCHAN EVO',1000,'EVO')">
+BELI & BAYAR
+</button>
 </div>
 
 <div class="product-card">
 <img src="tumbal.jpg">
 <h3>SC TUMBAL</h3>
 <p>Rp 3.000</p>
-<div class="stock">Stok: <span id="stock-tumbal"></span></div>
-<button id="btn-tumbal" onclick="openPayment('tumbal')">BELI & BAYAR</button>
+<p>Stok: <span id="stock-TUMBAL">5</span></p>
+<button id="btn-TUMBAL"
+onclick="openPayment('SC TUMBAL',3000,'TUMBAL')">
+BELI & BAYAR
+</button>
 </div>
 
 </div>
 </section>
 
-<!-- PAYMENT -->
 <div class="payment-popup" id="paymentPopup">
 <div class="payment-box">
 <h3 id="productName"></h3>
 <input type="number" id="qty" min="1" value="1" oninput="updateTotal()">
 <h2 id="totalPrice"></h2>
-
-<select id="paymentMethod" onchange="changePayment()">
-<option value="qris">QRIS</option>
-<option value="bank">Transfer Bank</option>
-</select>
-
-<div id="qrisBox">
-<img src="1c6c4720-0757-4214-9ac0-075856b3b832.jpg" style="width:100%">
-</div>
-
-<div id="bankBox" class="bank-box" style="display:none">
-<div class="bank-title">SEABANK</div>
-<div class="bank-row">901587002343</div>
-</div>
-
 <button onclick="sendToWA()">KIRIM KE CS</button>
 <button onclick="closePayment()">TUTUP</button>
 </div>
 </div>
 
-<a href="https://wa.me/6281382500612" class="wa-chat">CHAT CS</a>
+<a href="https://wa.me/6281382500612" class="wa-chat" target="_blank">
+CHAT CS
+</a>
 
 <script>
-const products={
-mega:{name:"MEGALODON OCEAN",price:130000,stock:5},
-evo:{name:"BATU ENCHAN EVO",price:1000,stock:1070},
-tumbal:{name:"SC TUMBAL",price:3000,stock:5000}
+let price=0,product="",productKey="";
+let stocks=JSON.parse(localStorage.getItem("stocks"))||{
+MEGALODON:3,EVO:10,TUMBAL:5
 };
 
-let currentKey="";
-
-function loadStock(){
-for(let k in products){
-let s=localStorage.getItem("stock_"+k);
-if(s!==null)products[k].stock=parseInt(s);
-document.getElementById("stock-"+k).innerText=products[k].stock;
-document.getElementById("btn-"+k).disabled=products[k].stock<=0;
+function renderStock(){
+for(let k in stocks){
+let s=document.getElementById("stock-"+k);
+let b=document.getElementById("btn-"+k);
+s.innerText=stocks[k];
+if(stocks[k]<=0){
+b.innerText="STOK HABIS";
+b.disabled=true;b.style.background="#555";
 }
 }
+}
+renderStock();
 
-function openPayment(key){
-currentKey=key;
-document.getElementById("productName").innerText=products[key].name;
-document.getElementById("qty").value=1;
+function openCurtain(){
+gateSound.play();
+curtain.classList.add("open");
+setTimeout(()=>curtain.style.display="none",1500);
+}
+
+function openPayment(p,h,k){
+product=p;price=h;productKey=k;
+qty.value=1;qty.max=stocks[k];
+productName.innerText=p;
 updateTotal();
-document.getElementById("paymentPopup").style.display="flex";
+paymentPopup.style.display="flex";
 }
 
 function updateTotal(){
-let q=+document.getElementById("qty").value;
-if(q>products[currentKey].stock){
-q=products[currentKey].stock;
-document.getElementById("qty").value=q;
-}
-document.getElementById("totalPrice").innerText=
-"Rp "+(q*products[currentKey].price).toLocaleString("id-ID");
-}
-
-function changePayment(){
-let m=document.getElementById("paymentMethod").value;
-qrisBox.style.display=m==="qris"?"block":"none";
-bankBox.style.display=m==="bank"?"block":"none";
+let q=parseInt(qty.value);
+if(q>stocks[productKey]) qty.value=stocks[productKey];
+totalPrice.innerText="Rp "+(qty.value*price).toLocaleString("id-ID");
 }
 
 function closePayment(){
-document.getElementById("paymentPopup").style.display="none";
+paymentPopup.style.display="none";
 }
 
 function sendToWA(){
-let q=+qty.value;
-products[currentKey].stock-=q;
-localStorage.setItem("stock_"+currentKey,products[currentKey].stock);
-loadStock();
-closePayment();
-
-let total=q*products[currentKey].price;
+let q=parseInt(qty.value);
+if(q>stocks[productKey]) return alert("Stok tidak cukup");
+stocks[productKey]-=q;
+localStorage.setItem("stocks",JSON.stringify(stocks));
+renderStock();
 window.open(
-`https://wa.me/6281382500612?text=Halo Admin R77%0AProduk: ${products[currentKey].name}%0AJumlah: ${q}%0ATotal: Rp ${total.toLocaleString("id-ID")}`,
+`https://wa.me/6281382500612?text=Halo Admin R77%0AProduk:${product}%0AJumlah:${q}%0ATotal:Rp ${(q*price).toLocaleString("id-ID")}`,
 "_blank"
 );
+closePayment();
 }
-
-loadStock();
 </script>
 
 </body>
