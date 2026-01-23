@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R77 FISH IT STORE</title>
+<link rel="icon" type="image/png" href="LOGO R77 (1).png">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#0b0b0f;color:#fff}
+header{display:flex;align-items:center;padding:15px 50px;background:linear-gradient(90deg,#000,#1a0000);border-bottom:2px solid #ff1e1e}
+.logo{display:flex;align-items:center;gap:10px}
+.logo img{width:45px}
+.logo h1{color:#ff1e1e}
+.admin-btn{margin-left:auto;padding:8px 16px;background:#ff1e1e;border:none;color:#fff;font-weight:bold;border-radius:6px;cursor:pointer}
+#products{padding:60px 50px;text-align:center}
+#products h2{color:#ff1e1e;margin-bottom:40px}
+.products-container{display:flex;gap:30px;justify-content:center;flex-wrap:wrap}
+.product-card{background:#141414;border:2px solid #ff1e1e;border-radius:10px;width:250px;padding:20px}
+.product-card img{width:100%;border-radius:8px}
+.product-card p{color:#ff1e1e;font-weight:bold}
+.product-card button{width:100%;padding:10px;background:#ff1e1e;border:none;color:#fff;font-weight:bold;border-radius:5px}
+.popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);justify-content:center;align-items:center;z-index:9999}
+.box{background:#141414;border:2px solid #ff1e1e;border-radius:12px;padding:20px;width:340px;text-align:center}
+.box input{width:100%;padding:8px;margin:8px 0}
+.box button{width:100%;padding:10px;margin-top:6px;background:#ff1e1e;border:none;color:#fff;font-weight:bold}
+.wa-chat{position:fixed;bottom:20px;right:20px;background:#25d366;color:#fff;padding:14px 20px;border-radius:50px;text-decoration:none}
+.curtain-wrapper{position:fixed;inset:0;display:flex;background:#000;z-index:20000}
+.curtain{width:50%;background:linear-gradient(90deg,#000,#1a0000);transition:1.4s}
+.curtain-wrapper.open .left{transform:translateX(-110%)}
+.curtain-wrapper.open .right{transform:translateX(110%)}
+.curtain-center{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.curtain-center h1{color:#ff1e1e;font-size:42px}
+.curtain-center button{padding:14px 40px;background:#ff1e1e;border:none;color:#fff;font-weight:bold}
+</style>
+</head>
+
+<body>
+
+<audio id="gateSound">
+<source src="Idgitaf - Sedia Aku Sebelum Hujan (Official Lyric Video).mp3">
+</audio>
+
+<div class="curtain-wrapper" id="curtain">
+<div class="curtain left"></div>
+<div class="curtain right"></div>
+<div class="curtain-center">
+<h1>WELCOME R77 FISH</h1>
+<button onclick="openCurtain()">MASUK STORE</button>
+</div>
+</div>
+
+<header>
+<div class="logo">
+<img src="LOGO R77 (1).png">
+<h1>R77FISH</h1>
+</div>
+<button class="admin-btn" onclick="adminLogin.style.display='flex'">ADMIN</button>
+</header>
+
+<section id="products">
+<h2>🔥 STOK SAAT INI 🔥</h2>
+<div class="products-container">
+
+<div class="product-card">
+<img src="Screenshot_28.png">
+<h3>MEGALODON OCEAN</h3>
+<p>Rp 130.000</p>
+<p>Stok: <span id="stock-MEGALODON"></span></p>
+<button onclick="openPayment('MEGALODON OCEAN',130000,'MEGALODON')">BELI</button>
+</div>
+
+<div class="product-card">
+<img src="batu evol.png">
+<h3>BATU ENCHAN EVO</h3>
+<p>Rp 1.000</p>
+<p>Stok: <span id="stock-EVO"></span></p>
+<button onclick="openPayment('BATU ENCHAN EVO',1000,'EVO')">BELI</button>
+</div>
+
+<div class="product-card">
+<img src="tumbal.jpg">
+<h3>SC TUMBAL</h3>
+<p>Rp 3.000</p>
+<p>Stok: <span id="stock-TUMBAL"></span></p>
+<button onclick="openPayment('SC TUMBAL',3000,'TUMBAL')">BELI</button>
+</div>
+
+</div>
+</section>
+
+<div class="popup" id="paymentPopup">
+<div class="box">
+<h3 id="productName"></h3>
+<input type="number" id="qty" value="1">
+<h2 id="totalPrice"></h2>
+<button onclick="sendToWA()">KIRIM KE CS</button>
+<button onclick="paymentPopup.style.display='none'">TUTUP</button>
+</div>
+</div>
+
+<div class="popup" id="payInfo">
+<div class="box">
+<h3>PEMBAYARAN</h3>
+<p><b>SEABANK</b></p>
+<p>901587002343</p>
+<p>a.n AZIZ</p>
+<hr>
+<p><b>QRIS</b></p>
+<img src="1c6c4720-0757-4214-9ac0-075856b3b832.jpg" width="200">
+<button onclick="payInfo.style.display='none'">TUTUP</button>
+</div>
+</div>
+
+<div class="popup" id="adminLogin">
+<div class="box">
+<h3>LOGIN / DAFTAR</h3>
+<input id="username" placeholder="Username">
+<input id="password" type="password" placeholder="Password">
+<button onclick="login()">LOGIN</button>
+<button onclick="register()">DAFTAR</button>
+<button onclick="adminLogin.style.display='none'">BATAL</button>
+</div>
+</div>
+
+<div class="popup" id="adminPanel">
+<div class="box">
+<h3>ADMIN PANEL</h3>
+<input id="edit-MEGALODON" type="number">
+<input id="edit-EVO" type="number">
+<input id="edit-TUMBAL" type="number">
+<button onclick="saveStock()">SIMPAN</button>
+<button onclick="adminPanel.style.display='none'">KELUAR</button>
+</div>
+</div>
+
+<a href="https://wa.me/6281382500612" class="wa-chat" target="_blank">CHAT CS</a>
+
+<script>
+const ADMIN_USER="R77",ADMIN_PASS="Megantara";
+let stocks=JSON.parse(localStorage.getItem("stocks"))||{MEGALODON:5,EVO:1070,TUMBAL:5000};
+let users=JSON.parse(localStorage.getItem("users"))||{};
+let product="",price=0,key="";
+
+function render(){
+for(let k in stocks)document.getElementById("stock-"+k).innerText=stocks[k];
+}
+render();
+
+function openCurtain(){
+gateSound.play().catch(()=>{});
+curtain.classList.add("open");
+setTimeout(()=>curtain.style.display="none",1600);
+}
+
+function openPayment(p,h,k){
+product=p;price=h;key=k;
+qty.value=1;
+productName.innerText=p;
+totalPrice.innerText="Rp "+h.toLocaleString("id-ID");
+paymentPopup.style.display="flex";
+}
+
+function sendToWA(){
+let q=parseInt(qty.value);
+stocks[key]-=q;
+localStorage.setItem("stocks",JSON.stringify(stocks));
+render();
+window.open(`https://wa.me/6281382500612?text=Halo Admin R77%0AProduk:${product}%0AJumlah:${q}`,"_blank");
+paymentPopup.style.display="none";
+payInfo.style.display="flex";
+}
+
+function register(){
+if(!username.value||!password.value)return alert("Isi data");
+users[username.value]=password.value;
+localStorage.setItem("users",JSON.stringify(users));
+alert("Daftar berhasil");
+}
+
+function login(){
+if(username.value===ADMIN_USER&&password.value===ADMIN_PASS){
+adminLogin.style.display="none";
+adminPanel.style.display="flex";
+edit-MEGALODON.value=stocks.MEGALODON;
+edit-EVO.value=stocks.EVO;
+edit-TUMBAL.value=stocks.TUMBAL;
+}else if(users[username.value]===password.value){
+alert("Login berhasil");
+adminLogin.style.display="none";
+}else alert("Login gagal");
+}
+
+function saveStock(){
+stocks.MEGALODON=+edit-MEGALODON.value;
+stocks.EVO=+edit-EVO.value;
+stocks.TUMBAL=+edit-TUMBAL.value;
+localStorage.setItem("stocks",JSON.stringify(stocks));
+render();
+alert("Stok disimpan");
+}
+</script>
+
+</body>
+</html>
