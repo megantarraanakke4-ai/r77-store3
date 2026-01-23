@@ -244,14 +244,16 @@ document.getElementById("edit-TUMBAL").value=stocks.TUMBAL;
 }else alert("Password salah");
 }
 function saveStock(){
-stocks.MEGALODON=parseInt(edit-MEGALODON.value);
-stocks.EVO=parseInt(edit-EVO.value);
-stocks.TUMBAL=parseInt(edit-TUMBAL.value);
-localStorage.setItem("stocks",JSON.stringify(stocks));
+stocks.MEGALODON = parseInt(document.getElementById("edit-MEGALODON").value);
+stocks.EVO       = parseInt(document.getElementById("edit-EVO").value);
+stocks.TUMBAL    = parseInt(document.getElementById("edit-TUMBAL").value);
+
+localStorage.setItem("stocks", JSON.stringify(stocks));
 renderStock();
-alert("Stok diperbarui");
+alert("Stok berhasil disimpan");
 }
 </script>
 
 </body>
 </html>
+
