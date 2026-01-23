@@ -74,6 +74,8 @@ background:#000;z-index:20000
 .curtain-wrapper.hidden{
 display:none !important;
 pointer-events:none !important;
+visibility:hidden !important;
+z-index:-999 !important;
 }
 .curtain{width:50%;background:linear-gradient(90deg,#000,#1a0000);transition:1.4s}
 .curtain-wrapper.open .left{transform:translateX(-110%)}
@@ -213,9 +215,19 @@ document.getElementById("stock-"+k).innerText=stocks[k];
 render();
 
 function openCurtain(){
-try{gateSound.currentTime=0;gateSound.play().catch(()=>{});}catch(e){}
-curtain.classList.add("open");
-setTimeout(()=>curtain.classList.add("hidden"),1500);
+  try{
+    gateSound.currentTime = 0;
+    gateSound.play().catch(()=>{});
+  }catch(e){}
+
+  curtain.classList.add("open");
+
+  setTimeout(()=>{
+    curtain.classList.add("hidden");
+
+    // 🔥 PEMBUNUH STUCK
+    document.body.style.pointerEvents = "auto";
+  }, 1400);
 }
 
 function openPayment(p,h,k){
@@ -268,3 +280,4 @@ alert("Stok disimpan");
 
 </body>
 </html>
+
