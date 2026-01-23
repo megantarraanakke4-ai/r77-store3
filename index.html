@@ -149,10 +149,19 @@ for(let k in stocks)document.getElementById("stock-"+k).innerText=stocks[k];
 render();
 
 function openCurtain(){
-gateSound.play().catch(()=>{});
-curtain.classList.add("open");
-setTimeout(()=>curtain.style.display="none",1600);
+  try{
+    gateSound.currentTime = 0;
+    gateSound.play().catch(()=>{});
+  }catch(e){}
+
+  curtain.classList.add("open");
+
+  setTimeout(()=>{
+    curtain.style.display = "none";
+    curtain.style.pointerEvents = "none";
+  }, 1600);
 }
+
 
 function openPayment(p,h,k){
 product=p;price=h;key=k;
@@ -204,3 +213,4 @@ alert("Stok disimpan");
 
 </body>
 </html>
+
