@@ -4,23 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>R77 FISH IT STORE</title>
-<link rel="icon" type="image/png" href="LOGO R77 (1).png">
-</head>
-  
+<link rel="icon" href="LOGO R77 (1).png">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
 body{background:#0b0b0f;color:#fff}
 
 /* HEADER */
 header{
 display:flex;justify-content:space-between;align-items:center;
-padding:15px 50px;background:linear-gradient(90deg,#000,#1a0000);
+padding:15px 50px;
+background:linear-gradient(90deg,#000,#1a0000);
 border-bottom:2px solid #ff1e1e
 }
 .logo{display:flex;align-items:center;gap:10px}
 .logo img{width:45px}
-.logo h1{color:#ff1e1e;font-weight:bold;letter-spacing:2px}
-nav a{color:#fff;margin-left:25px;text-decoration:none;font-weight:bold}
+.logo h1{color:#ff1e1e;letter-spacing:2px}
 
 /* PRODUCTS */
 #products{padding:60px 50px;text-align:center}
@@ -29,17 +27,20 @@ nav a{color:#fff;margin-left:25px;text-decoration:none;font-weight:bold}
 display:flex;gap:30px;justify-content:center;flex-wrap:wrap
 }
 .product-card{
-background:#141414;border:2px solid #ff1e1e;border-radius:10px;
-width:250px;padding:20px;transition:.3s
+background:#141414;border:2px solid #ff1e1e;
+border-radius:10px;width:250px;padding:20px
 }
-.product-card:hover{transform:scale(1.05);box-shadow:0 0 20px #ff1e1e}
 .product-card img{width:100%;border-radius:8px}
 .product-card h3{margin:15px 0 5px}
 .product-card p{color:#ff1e1e;font-weight:bold}
+.stock{margin-top:5px;font-size:14px}
 .product-card button{
 margin-top:10px;width:100%;padding:10px;
 background:#ff1e1e;color:#fff;border:none;border-radius:5px;
 font-weight:bold;cursor:pointer
+}
+.product-card button:disabled{
+background:#555;cursor:not-allowed
 }
 
 /* PAYMENT */
@@ -50,79 +51,35 @@ justify-content:center;align-items:center;z-index:10000
 }
 .payment-box{
 background:#141414;border:2px solid #ff1e1e;
-border-radius:12px;padding:20px;text-align:center;width:340px
+border-radius:12px;padding:20px;width:340px;text-align:center
 }
-.payment-box h3{color:#ff1e1e;margin-bottom:5px}
+.payment-box h3{color:#ff1e1e}
 .payment-box input,select{
 width:100%;padding:8px;margin:8px 0;border-radius:5px;border:none
 }
 .payment-box button{
-margin-top:10px;width:100%;padding:10px;
+width:100%;padding:10px;margin-top:8px;
 background:#ff1e1e;color:#fff;border:none;border-radius:5px;font-weight:bold
 }
 
-/* BANK STYLE */
+/* BANK */
 .bank-box{
-margin-top:10px;
-background:#0f0f0f;
-border:1px solid #ff1e1e;
-border-radius:8px;
-padding:10px;
-text-align:left
+background:#0f0f0f;border:1px solid #ff1e1e;
+border-radius:8px;padding:10px;margin-top:10px;text-align:left
 }
-.bank-item{
-padding:8px 0;
-border-bottom:1px dashed #333
-}
-.bank-item:last-child{border-bottom:none}
-.bank-title{
-color:#ff1e1e;font-weight:bold;font-size:14px;margin-bottom:4px
-}
-.bank-row{
-font-size:13px;color:#ddd;padding-left:6px;line-height:1.4
-}
+.bank-title{color:#ff1e1e;font-weight:bold}
+.bank-row{font-size:13px;color:#ddd}
 
 /* WHATSAPP */
 .wa-chat{
 position:fixed;bottom:20px;right:20px;
 background:#25d366;color:#fff;padding:14px 20px;
-border-radius:50px;font-weight:bold;text-decoration:none;z-index:9999
-}
-
-/* CURTAIN */
-.curtain-wrapper{
-position:fixed;inset:0;display:flex;z-index:20000;background:#000
-}
-.curtain{width:50%;background:linear-gradient(90deg,#000,#1a0000);
-transition:transform 1.4s cubic-bezier(.77,0,.18,1)}
-.curtain-wrapper.open .left{transform:translateX(-110%)}
-.curtain-wrapper.open .right{transform:translateX(110%)}
-.curtain-center{
-position:absolute;inset:0;display:flex;flex-direction:column;
-justify-content:center;align-items:center;text-align:center
-}
-.curtain-center h1{color:#ff1e1e;font-size:46px;text-shadow:0 0 25px #ff1e1e}
-.curtain-center button{
-margin-top:20px;padding:14px 40px;
-background:#ff1e1e;border:none;color:#fff;font-weight:bold;cursor:pointer
+border-radius:50px;font-weight:bold;text-decoration:none
 }
 </style>
 </head>
 
 <body>
-
-<audio id="gateSound">
-<source src="Idgitaf - Sedia Aku Sebelum Hujan (Official Lyric Video).mp3" type="audio/mpeg">
-</audio>
-
-<div class="curtain-wrapper" id="curtain">
-<div class="curtain left"></div>
-<div class="curtain right"></div>
-<div class="curtain-center">
-<h1>WELCOME R77 FISH</h1>
-<button onclick="openCurtain()">MASUK STORE</button>
-</div>
-</div>
 
 <header>
 <div class="logo">
@@ -133,42 +90,44 @@ background:#ff1e1e;border:none;color:#fff;font-weight:bold;cursor:pointer
 
 <section id="products">
 <h2>🔥 STOK SAAT INI 🔥</h2>
-
 <div class="products-container">
 
 <div class="product-card">
 <img src="Screenshot_28.png">
 <h3>MEGALODON OCEAN</h3>
 <p>Rp 130.000</p>
-<button onclick="openPayment('MEGALODON OCEAN',130000)">BELI & BAYAR</button>
+<div class="stock">Stok: <span id="stock-mega"></span></div>
+<button id="btn-mega" onclick="openPayment('mega')">BELI & BAYAR</button>
 </div>
 
 <div class="product-card">
-<img src="Screenshot_27.png">
-<h3>LEVIATHAN</h3>
-<p>Rp 150.000</p>
-<button onclick="openPayment('LEVIATHAN',150000)">BELI & BAYAR</button>
+<img src="batu evol.png">
+<h3>BATU ENCHAN EVO</h3>
+<p>Rp 1.000</p>
+<div class="stock">Stok: <span id="stock-evo"></span></div>
+<button id="btn-evo" onclick="openPayment('evo')">BELI & BAYAR</button>
 </div>
 
 <div class="product-card">
 <img src="tumbal.jpg">
 <h3>SC TUMBAL</h3>
 <p>Rp 3.000</p>
-<button onclick="openPayment('SC TUMBAL',3000)">BELI & BAYAR</button>
+<div class="stock">Stok: <span id="stock-tumbal"></span></div>
+<button id="btn-tumbal" onclick="openPayment('tumbal')">BELI & BAYAR</button>
 </div>
 
 </div>
 </section>
 
+<!-- PAYMENT -->
 <div class="payment-popup" id="paymentPopup">
 <div class="payment-box">
-
 <h3 id="productName"></h3>
 <input type="number" id="qty" min="1" value="1" oninput="updateTotal()">
 <h2 id="totalPrice"></h2>
 
 <select id="paymentMethod" onchange="changePayment()">
-<option value="qris">QRIS (All Bank)</option>
+<option value="qris">QRIS</option>
 <option value="bank">Transfer Bank</option>
 </select>
 
@@ -177,53 +136,57 @@ background:#ff1e1e;border:none;color:#fff;font-weight:bold;cursor:pointer
 </div>
 
 <div id="bankBox" class="bank-box" style="display:none">
-<div class="bank-item">
 <div class="bank-title">SEABANK</div>
-<div class="bank-row">No Rek: 901587002343</div>
-<div class="bank-row">a/n Alaa Uddiin Aziz Al Haq</div>
-</div>
-<div class="bank-item">
-<div class="bank-title">BCA</div>
-<div class="bank-row">Status: OFFLINE</div>
-<div class="bank-row">a/n -</div>
-</div>
+<div class="bank-row">901587002343</div>
 </div>
 
 <button onclick="sendToWA()">KIRIM KE CS</button>
 <button onclick="closePayment()">TUTUP</button>
-
 </div>
 </div>
 
-<a href="https://wa.me/6281382500612" class="wa-chat" target="_blank">CHAT CS</a>
+<a href="https://wa.me/6281382500612" class="wa-chat">CHAT CS</a>
 
 <script>
-let price=0, product="";
+const products={
+mega:{name:"MEGALODON OCEAN",price:130000,stock:5},
+evo:{name:"BATU ENCHAN EVO",price:1000,stock:1070},
+tumbal:{name:"SC TUMBAL",price:3000,stock:5000}
+};
 
-function openCurtain(){
-document.getElementById("gateSound").play();
-document.getElementById("curtain").classList.add("open");
-setTimeout(()=>document.getElementById("curtain").style.display="none",1500);
+let currentKey="";
+
+function loadStock(){
+for(let k in products){
+let s=localStorage.getItem("stock_"+k);
+if(s!==null)products[k].stock=parseInt(s);
+document.getElementById("stock-"+k).innerText=products[k].stock;
+document.getElementById("btn-"+k).disabled=products[k].stock<=0;
+}
 }
 
-function openPayment(p,h){
-product=p;price=h;
-document.getElementById("productName").innerText=p;
+function openPayment(key){
+currentKey=key;
+document.getElementById("productName").innerText=products[key].name;
 document.getElementById("qty").value=1;
 updateTotal();
 document.getElementById("paymentPopup").style.display="flex";
 }
 
 function updateTotal(){
-let q=document.getElementById("qty").value;
-document.getElementById("totalPrice").innerText =
-"Rp "+(q*price).toLocaleString("id-ID");
+let q=+document.getElementById("qty").value;
+if(q>products[currentKey].stock){
+q=products[currentKey].stock;
+document.getElementById("qty").value=q;
+}
+document.getElementById("totalPrice").innerText=
+"Rp "+(q*products[currentKey].price).toLocaleString("id-ID");
 }
 
 function changePayment(){
 let m=document.getElementById("paymentMethod").value;
-document.getElementById("qrisBox").style.display = m==="qris"?"block":"none";
-document.getElementById("bankBox").style.display = m==="bank"?"block":"none";
+qrisBox.style.display=m==="qris"?"block":"none";
+bankBox.style.display=m==="bank"?"block":"none";
 }
 
 function closePayment(){
@@ -231,19 +194,21 @@ document.getElementById("paymentPopup").style.display="none";
 }
 
 function sendToWA(){
-let q=document.getElementById("qty").value;
-let t=q*price;
-let m=document.getElementById("paymentMethod").value;
-let method = m==="qris"?"QRIS":"TRANSFER BANK";
+let q=+qty.value;
+products[currentKey].stock-=q;
+localStorage.setItem("stock_"+currentKey,products[currentKey].stock);
+loadStock();
+closePayment();
+
+let total=q*products[currentKey].price;
 window.open(
-`https://wa.me/6281382500612?text=Halo Admin R77%0AProduk: ${product}%0AJumlah: ${q}%0ATotal: Rp ${t.toLocaleString("id-ID")}%0AMetode: ${method}`,
+`https://wa.me/6281382500612?text=Halo Admin R77%0AProduk: ${products[currentKey].name}%0AJumlah: ${q}%0ATotal: Rp ${total.toLocaleString("id-ID")}`,
 "_blank"
 );
 }
+
+loadStock();
 </script>
 
 </body>
 </html>
-
-
-
