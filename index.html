@@ -99,20 +99,20 @@ background:#ff1e1e;border:none;color:#fff;font-weight:bold
 </audio>
 
 <div class="curtain-wrapper" id="curtain">
-<div class="curtain left"></div>
-<div class="curtain right"></div>
-<div class="curtain-center">
-<h1>WELCOME R77 FISH</h1>
-<button onclick="openCurtain()">MASUK STORE</button>
-</div>
+  <div class="curtain left"></div>
+  <div class="curtain right"></div>
+  <div class="curtain-center">
+    <h1>WELCOME R77 FISH</h1>
+    <button onclick="openCurtain()">MASUK STORE</button>
+  </div>
 </div>
 
 <header>
-<div class="logo">
-<img src="LOGO R77 (1).png">
-<h1>R77FISH</h1>
-</div>
-<button class="admin-btn" onclick="openAdminLogin()">ADMIN</button>
+  <div class="logo">
+    <img src="LOGO R77 (1).png">
+    <h1>R77FISH</h1>
+  </div>
+  <button class="admin-btn" onclick="openAdminLogin()">ADMIN</button>
 </header>
 
 <section id="products">
@@ -161,16 +161,12 @@ background:#ff1e1e;border:none;color:#fff;font-weight:bold
 <div class="popup" id="payInfo">
 <div class="box">
 <h3>PEMBAYARAN</h3>
-
-<p><b> SEABANK </b></p>
-<p>BCA : 901587002343</p>
+<p><b>BCA</b></p>
+<p>901587002343</p>
 <p>a.n AZIZ</p>
-
 <hr style="margin:10px 0;border:1px solid #333">
-
 <p><b>QRIS</b></p>
 <img src="1c6c4720-0757-4214-9ac0-075856b3b832.jpg" style="width:200px;border-radius:8px">
-
 <button onclick="payInfo.style.display='none'">TUTUP</button>
 </div>
 </div>
@@ -203,6 +199,7 @@ background:#ff1e1e;border:none;color:#fff;font-weight:bold
 const gateSound=document.getElementById("gateSound");
 const curtain=document.getElementById("curtain");
 const ADMIN_PASSWORD="r77admin";
+
 let price=0,product="",productKey="";
 
 let stocks=JSON.parse(localStorage.getItem("stocks"))||{
@@ -221,19 +218,13 @@ b.innerText="HABIS";b.disabled=true;b.style.background="#555";
 renderStock();
 
 function openCurtain(){
-try{
-gateSound.currentTime = 0;
-gateSound.play().catch(()=>{});
-}catch(e){}
-
+try{gateSound.currentTime=0;gateSound.play().catch(()=>{});}catch(e){}
 curtain.classList.add("open");
-
 setTimeout(()=>{
-curtain.style.display = "none";
-curtain.style.pointerEvents = "none";
-}, 1600);
+curtain.style.display="none";
+curtain.style.pointerEvents="none";
+},1600);
 }
-
 
 function openPayment(p,h,k){
 product=p;price=h;productKey=k;
@@ -252,26 +243,26 @@ let q=parseInt(qty.value);
 stocks[productKey]-=q;
 localStorage.setItem("stocks",JSON.stringify(stocks));
 renderStock();
-window.open(
-`https://wa.me/6281382500612?text=Halo Admin R77%0AProduk:${product}%0AJumlah:${q}%0ATotal:Rp ${(q*price).toLocaleString("id-ID")}`,
-"_blank");
+window.open(`https://wa.me/6281382500612?text=Halo Admin R77%0AProduk:${product}%0AJumlah:${q}%0ATotal:Rp ${(q*price).toLocaleString("id-ID")}`,"_blank");
 paymentPopup.style.display="none";
 }
 
 function openAdminLogin(){adminLogin.style.display="flex"}
+
 function loginAdmin(){
 if(adminPass.value===ADMIN_PASSWORD){
 adminLogin.style.display="none";
 adminPanel.style.display="flex";
-edit-MEGALODON.value=stocks.MEGALODON;
-edit-EVO.value=stocks.EVO;
-edit-TUMBAL.value=stocks.TUMBAL;
+document.getElementById("edit-MEGALODON").value=stocks.MEGALODON;
+document.getElementById("edit-EVO").value=stocks.EVO;
+document.getElementById("edit-TUMBAL").value=stocks.TUMBAL;
 }else alert("Password salah");
 }
+
 function saveStock(){
-stocks.MEGALODON=parseInt(edit-MEGALODON.value);
-stocks.EVO=parseInt(edit-EVO.value);
-stocks.TUMBAL=parseInt(edit-TUMBAL.value);
+stocks.MEGALODON=parseInt(document.getElementById("edit-MEGALODON").value)||0;
+stocks.EVO=parseInt(document.getElementById("edit-EVO").value)||0;
+stocks.TUMBAL=parseInt(document.getElementById("edit-TUMBAL").value)||0;
 localStorage.setItem("stocks",JSON.stringify(stocks));
 renderStock();
 alert("Stok berhasil disimpan");
@@ -280,4 +271,3 @@ alert("Stok berhasil disimpan");
 
 </body>
 </html>
-
