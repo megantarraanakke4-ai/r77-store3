@@ -9,30 +9,85 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#0b0b0f;color:#fff}
-header{display:flex;align-items:center;padding:15px 50px;background:linear-gradient(90deg,#000,#1a0000);border-bottom:2px solid #ff1e1e}
+
+/* HEADER */
+header{
+display:flex;align-items:center;
+padding:15px 50px;
+background:linear-gradient(90deg,#000,#1a0000);
+border-bottom:2px solid #ff1e1e
+}
 .logo{display:flex;align-items:center;gap:10px}
 .logo img{width:45px}
 .logo h1{color:#ff1e1e}
-.admin-btn{margin-left:auto;padding:8px 16px;background:#ff1e1e;border:none;color:#fff;font-weight:bold;border-radius:6px;cursor:pointer}
+.admin-btn{
+margin-left:auto;
+padding:8px 16px;
+background:#ff1e1e;border:none;color:#fff;
+font-weight:bold;border-radius:6px;cursor:pointer
+}
+
+/* PRODUCTS */
 #products{padding:60px 50px;text-align:center}
 #products h2{color:#ff1e1e;margin-bottom:40px}
 .products-container{display:flex;gap:30px;justify-content:center;flex-wrap:wrap}
-.product-card{background:#141414;border:2px solid #ff1e1e;border-radius:10px;width:250px;padding:20px}
+.product-card{
+background:#141414;border:2px solid #ff1e1e;border-radius:10px;
+width:250px;padding:20px
+}
 .product-card img{width:100%;border-radius:8px}
 .product-card p{color:#ff1e1e;font-weight:bold}
-.product-card button{width:100%;padding:10px;background:#ff1e1e;border:none;color:#fff;font-weight:bold;border-radius:5px}
-.popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);justify-content:center;align-items:center;z-index:9999}
-.box{background:#141414;border:2px solid #ff1e1e;border-radius:12px;padding:20px;width:340px;text-align:center}
+.product-card button{
+width:100%;padding:10px;
+background:#ff1e1e;border:none;color:#fff;
+font-weight:bold;border-radius:5px;cursor:pointer
+}
+
+/* POPUP */
+.popup{
+display:none;position:fixed;inset:0;
+background:rgba(0,0,0,.85);
+justify-content:center;align-items:center;z-index:10000
+}
+.box{
+background:#141414;border:2px solid #ff1e1e;
+border-radius:12px;padding:20px;width:340px;text-align:center
+}
 .box input{width:100%;padding:8px;margin:8px 0}
-.box button{width:100%;padding:10px;margin-top:6px;background:#ff1e1e;border:none;color:#fff;font-weight:bold}
-.wa-chat{position:fixed;bottom:20px;right:20px;background:#25d366;color:#fff;padding:14px 20px;border-radius:50px;text-decoration:none}
-.curtain-wrapper{position:fixed;inset:0;display:flex;background:#000;z-index:20000}
+.box button{
+width:100%;padding:10px;margin-top:6px;
+background:#ff1e1e;border:none;color:#fff;font-weight:bold
+}
+
+/* WHATSAPP */
+.wa-chat{
+position:fixed;bottom:20px;right:20px;
+background:#25d366;color:#fff;
+padding:14px 20px;border-radius:50px;text-decoration:none
+}
+
+/* CURTAIN */
+.curtain-wrapper{
+position:fixed;inset:0;display:flex;
+background:#000;z-index:20000
+}
+.curtain-wrapper.hidden{
+display:none !important;
+pointer-events:none !important;
+}
 .curtain{width:50%;background:linear-gradient(90deg,#000,#1a0000);transition:1.4s}
 .curtain-wrapper.open .left{transform:translateX(-110%)}
 .curtain-wrapper.open .right{transform:translateX(110%)}
-.curtain-center{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.curtain-center{
+position:absolute;inset:0;
+display:flex;flex-direction:column;
+justify-content:center;align-items:center
+}
 .curtain-center h1{color:#ff1e1e;font-size:42px}
-.curtain-center button{padding:14px 40px;background:#ff1e1e;border:none;color:#fff;font-weight:bold}
+.curtain-center button{
+padding:14px 40px;
+background:#ff1e1e;border:none;color:#fff;font-weight:bold
+}
 </style>
 </head>
 
@@ -56,7 +111,7 @@ header{display:flex;align-items:center;padding:15px 50px;background:linear-gradi
 <img src="LOGO R77 (1).png">
 <h1>R77FISH</h1>
 </div>
-<button class="admin-btn" onclick="adminLogin.style.display='flex'">ADMIN</button>
+<button class="admin-btn" onclick="adminLogin.style.display='flex'">LOGIN</button>
 </header>
 
 <section id="products">
@@ -90,6 +145,7 @@ header{display:flex;align-items:center;padding:15px 50px;background:linear-gradi
 </div>
 </section>
 
+<!-- PAYMENT -->
 <div class="popup" id="paymentPopup">
 <div class="box">
 <h3 id="productName"></h3>
@@ -100,6 +156,7 @@ header{display:flex;align-items:center;padding:15px 50px;background:linear-gradi
 </div>
 </div>
 
+<!-- PAYMENT INFO -->
 <div class="popup" id="payInfo">
 <div class="box">
 <h3>PEMBAYARAN</h3>
@@ -113,6 +170,7 @@ header{display:flex;align-items:center;padding:15px 50px;background:linear-gradi
 </div>
 </div>
 
+<!-- LOGIN / DAFTAR -->
 <div class="popup" id="adminLogin">
 <div class="box">
 <h3>LOGIN / DAFTAR</h3>
@@ -124,6 +182,7 @@ header{display:flex;align-items:center;padding:15px 50px;background:linear-gradi
 </div>
 </div>
 
+<!-- ADMIN PANEL -->
 <div class="popup" id="adminPanel">
 <div class="box">
 <h3>ADMIN PANEL</h3>
@@ -138,30 +197,26 @@ header{display:flex;align-items:center;padding:15px 50px;background:linear-gradi
 <a href="https://wa.me/6281382500612" class="wa-chat" target="_blank">CHAT CS</a>
 
 <script>
-const ADMIN_USER="R77",ADMIN_PASS="Megantara";
+const ADMIN_USER="R77", ADMIN_PASS="Megantara";
+const gateSound=document.getElementById("gateSound");
+const curtain=document.getElementById("curtain");
+
 let stocks=JSON.parse(localStorage.getItem("stocks"))||{MEGALODON:5,EVO:1070,TUMBAL:5000};
 let users=JSON.parse(localStorage.getItem("users"))||{};
 let product="",price=0,key="";
 
 function render(){
-for(let k in stocks)document.getElementById("stock-"+k).innerText=stocks[k];
+for(let k in stocks){
+document.getElementById("stock-"+k).innerText=stocks[k];
+}
 }
 render();
 
 function openCurtain(){
-  try{
-    gateSound.currentTime = 0;
-    gateSound.play().catch(()=>{});
-  }catch(e){}
-
-  curtain.classList.add("open");
-
-  setTimeout(()=>{
-    curtain.style.display = "none";
-    curtain.style.pointerEvents = "none";
-  }, 1600);
+try{gateSound.currentTime=0;gateSound.play().catch(()=>{});}catch(e){}
+curtain.classList.add("open");
+setTimeout(()=>curtain.classList.add("hidden"),1500);
 }
-
 
 function openPayment(p,h,k){
 product=p;price=h;key=k;
@@ -189,7 +244,7 @@ alert("Daftar berhasil");
 }
 
 function login(){
-if(username.value===ADMIN_USER&&password.value===ADMIN_PASS){
+if(username.value===ADMIN_USER && password.value===ADMIN_PASS){
 adminLogin.style.display="none";
 adminPanel.style.display="flex";
 edit-MEGALODON.value=stocks.MEGALODON;
@@ -213,4 +268,3 @@ alert("Stok disimpan");
 
 </body>
 </html>
-
