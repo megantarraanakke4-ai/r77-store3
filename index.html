@@ -221,11 +221,19 @@ b.innerText="HABIS";b.disabled=true;b.style.background="#555";
 renderStock();
 
 function openCurtain(){
-gateSound.currentTime=0;
+try{
+gateSound.currentTime = 0;
 gateSound.play().catch(()=>{});
+}catch(e){}
+
 curtain.classList.add("open");
-setTimeout(()=>curtain.style.display="none",1500);
+
+setTimeout(()=>{
+curtain.style.display = "none";
+curtain.style.pointerEvents = "none";
+}, 1600);
 }
+
 
 function openPayment(p,h,k){
 product=p;price=h;productKey=k;
@@ -272,3 +280,4 @@ alert("Stok berhasil disimpan");
 
 </body>
 </html>
+
