@@ -146,16 +146,36 @@ background:#ff1e1e;border:none;color:#fff;font-weight:bold
 </div>
 </section>
 
+<!-- PAYMENT -->
 <div class="popup" id="paymentPopup">
 <div class="box">
 <h3 id="productName"></h3>
 <input type="number" id="qty" min="1" value="1" oninput="updateTotal()">
 <h2 id="totalPrice"></h2>
-<button onclick="sendToWA()">KIRIM KE CS</button>
+<button onclick="sendToWA(); payInfo.style.display='flex'">KIRIM KE CS</button>
 <button onclick="paymentPopup.style.display='none'">TUTUP</button>
 </div>
 </div>
 
+<!-- PAYMENT INFO -->
+<div class="popup" id="payInfo">
+<div class="box">
+<h3>PEMBAYARAN</h3>
+
+<p><b> SEABANK </b></p>
+<p>BCA : 901587002343</p>
+<p>a.n AZIZ</p>
+
+<hr style="margin:10px 0;border:1px solid #333">
+
+<p><b>QRIS</b></p>
+<img src="1c6c4720-0757-4214-9ac0-075856b3b832.jpg" style="width:200px;border-radius:8px">
+
+<button onclick="payInfo.style.display='none'">TUTUP</button>
+</div>
+</div>
+
+<!-- ADMIN LOGIN -->
 <div class="popup" id="adminLogin">
 <div class="box">
 <h3>ADMIN LOGIN</h3>
@@ -165,6 +185,7 @@ background:#ff1e1e;border:none;color:#fff;font-weight:bold
 </div>
 </div>
 
+<!-- ADMIN PANEL -->
 <div class="popup" id="adminPanel">
 <div class="box">
 <h3>ADMIN PANEL</h3>
@@ -179,10 +200,8 @@ background:#ff1e1e;border:none;color:#fff;font-weight:bold
 <a href="https://wa.me/6281382500612" class="wa-chat" target="_blank">CHAT CS</a>
 
 <script>
-/* FIX BUTTON MASUK STORE */
-const gateSound = document.getElementById("gateSound");
-const curtain = document.getElementById("curtain");
-
+const gateSound=document.getElementById("gateSound");
+const curtain=document.getElementById("curtain");
 const ADMIN_PASSWORD="r77admin";
 let price=0,product="",productKey="";
 
@@ -202,12 +221,10 @@ b.innerText="HABIS";b.disabled=true;b.style.background="#555";
 renderStock();
 
 function openCurtain(){
-  if(gateSound){
-    gateSound.currentTime=0;
-    gateSound.play().catch(()=>{});
-  }
-  curtain.classList.add("open");
-  setTimeout(()=>curtain.style.display="none",1500);
+gateSound.currentTime=0;
+gateSound.play().catch(()=>{});
+curtain.classList.add("open");
+setTimeout(()=>curtain.style.display="none",1500);
 }
 
 function openPayment(p,h,k){
@@ -238,17 +255,16 @@ function loginAdmin(){
 if(adminPass.value===ADMIN_PASSWORD){
 adminLogin.style.display="none";
 adminPanel.style.display="flex";
-document.getElementById("edit-MEGALODON").value=stocks.MEGALODON;
-document.getElementById("edit-EVO").value=stocks.EVO;
-document.getElementById("edit-TUMBAL").value=stocks.TUMBAL;
+edit-MEGALODON.value=stocks.MEGALODON;
+edit-EVO.value=stocks.EVO;
+edit-TUMBAL.value=stocks.TUMBAL;
 }else alert("Password salah");
 }
 function saveStock(){
-stocks.MEGALODON = parseInt(document.getElementById("edit-MEGALODON").value);
-stocks.EVO       = parseInt(document.getElementById("edit-EVO").value);
-stocks.TUMBAL    = parseInt(document.getElementById("edit-TUMBAL").value);
-
-localStorage.setItem("stocks", JSON.stringify(stocks));
+stocks.MEGALODON=parseInt(edit-MEGALODON.value);
+stocks.EVO=parseInt(edit-EVO.value);
+stocks.TUMBAL=parseInt(edit-TUMBAL.value);
+localStorage.setItem("stocks",JSON.stringify(stocks));
 renderStock();
 alert("Stok berhasil disimpan");
 }
@@ -256,4 +272,3 @@ alert("Stok berhasil disimpan");
 
 </body>
 </html>
-
